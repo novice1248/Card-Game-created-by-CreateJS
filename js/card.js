@@ -73,17 +73,17 @@ class DraggableCard extends Card {
     isDroppedOnTarget(target) {
         const targetX = target.x;
         const targetY = target.y;
-        const targetWidth = 150;  // 適切なサイズを設定
-        const targetHeight = 150;
+        const targetWidth = 300;  // 適切なサイズを設定
+        const targetHeight = 300;
     
         console.log("Card position:", this.x, this.y);
         console.log("Target position and size:", targetX, targetY, targetWidth, targetHeight);
     
         return (
-            this.x > targetX &&
-            this.x < targetX + targetWidth &&
-            this.y > targetY &&
-            this.y < targetY + targetHeight
+            this.x + this.getBounds().width / 2 > targetX &&
+            this.x + this.getBounds().width / 2 < targetX + targetWidth &&
+            this.y + this.getBounds().height / 2 > targetY &&
+            this.y + this.getBounds().height / 2 < targetY + targetHeight
         );
     }
     
@@ -91,7 +91,9 @@ class DraggableCard extends Card {
     
 
     play(target) {
-        this.effect(target);
+        console.log("Playing card effect on target.");
+        this.effect(target);  // 正しいターゲット（enemy）を渡す
     }
+    
 }
 

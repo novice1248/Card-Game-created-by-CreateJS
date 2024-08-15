@@ -21,13 +21,12 @@ let attackCard = new DraggableCard(
     "assets/attack_plus.png", 
     1, 
     "attack", 
-    function(target) {
-        target.takeDamage(10);
+    function() {
+        enemy.takeDamage(10);  // `enemyShape`ではなく、`enemy`にダメージを与える
     },
     stage,
-    enemyShape  // targetEnemyとしてenemyShapeを渡す
+    enemyShape  // 衝突判定にはenemyShapeを使う
 );
-
 
   attackCard.x = 100;
   attackCard.y = 400;
