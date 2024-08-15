@@ -66,14 +66,15 @@ class DraggableCard extends Card {
     }
 
     isDroppedOnTarget(target) {
-        const targetBounds = target.getBounds();
+        const targetBounds = target.getTransformedBounds(); // getTransformedBoundsを使用
         return (
-            this.x > target.x &&
-            this.x < target.x + targetBounds.width &&
-            this.y > target.y &&
-            this.y < target.y + targetBounds.height
+            this.x > targetBounds.x &&
+            this.x < targetBounds.x + targetBounds.width &&
+            this.y > targetBounds.y &&
+            this.y < targetBounds.y + targetBounds.height
         );
     }
+    
 
     play(target) {
         this.effect(target);
