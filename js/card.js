@@ -58,21 +58,26 @@ class DraggableCard extends Card {
 
     handleMouseUp(event) {
         if (this.isDroppedOnTarget(this.targetEnemy)) {
+            console.log("Target found, applying damage.");
             this.play(this.targetEnemy); // 敵に対してカードの効果を発動
             this._stage.removeChild(this); // カードをステージから削除
         } else {
-            // カードを元の位置に戻す
+            console.log("Not dropped on target, resetting position.");
             this.x = 100;
             this.y = 400;
         }
         this._stage.update();
     }
+    
 
     isDroppedOnTarget(target) {
         const targetX = target.x;
         const targetY = target.y;
-        const targetWidth = 10000;  // Shapeの幅を直接指定
-        const targetHeight = 10000; // Shapeの高さを直接指定
+        const targetWidth = 150;  // 適切なサイズを設定
+        const targetHeight = 150;
+    
+        console.log("Card position:", this.x, this.y);
+        console.log("Target position and size:", targetX, targetY, targetWidth, targetHeight);
     
         return (
             this.x > targetX &&
@@ -81,6 +86,7 @@ class DraggableCard extends Card {
             this.y < targetY + targetHeight
         );
     }
+    
     
     
 

@@ -10,30 +10,24 @@ window.onload = function () {
   let enemy = new Enemy("Slime", 30);
 
   let enemyShape = new createjs.Shape();
-  enemyShape.graphics.beginFill("red").drawRect(0, 0, 100, 100);
-  enemyShape.x = 500;
-  enemyShape.y = 200;
+enemyShape.graphics.beginFill("red").drawRect(0, 0, 100, 100);
+enemyShape.x = 500;
+enemyShape.y = 200;
+enemyShape.setBounds(0, 0, 100, 100); // setBoundsを使用してBoundsを設定
+stage.addChild(enemyShape);
 
-  // getBoundsを手動で定義
-  enemyShape.getBounds = function () {
-    return { width: 100, height: 100 };
-  };
-
-  stage.addChild(enemyShape);
-
-  let attackCard = new DraggableCard(
-    "Attack+",
-    "assets/attack_plus.png",
-    1,
-    "attack",
-    function (target) {
-      console.log("Applying damage to the enemy."); // デバッグログ
-      target.takeDamage(10); // 敵のHPを減らす
-      console.log("Enemy's HP after damage: " + target.health); // デバッグログ
+let attackCard = new DraggableCard(
+    "Attack+", 
+    "assets/attack_plus.png", 
+    1, 
+    "attack", 
+    function(target) {
+        target.takeDamage(10);
     },
     stage,
-    enemy
-  );
+    enemyShape  // targetEnemyとしてenemyShapeを渡す
+);
+
 
   attackCard.x = 100;
   attackCard.y = 400;
