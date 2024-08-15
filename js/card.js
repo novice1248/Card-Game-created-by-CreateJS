@@ -71,8 +71,8 @@ class DraggableCard extends Card {
     isDroppedOnTarget(target) {
         const targetX = target.x;
         const targetY = target.y;
-        const targetWidth = 100;  // Shapeの幅を直接指定
-        const targetHeight = 100; // Shapeの高さを直接指定
+        const targetWidth = 10000;  // Shapeの幅を直接指定
+        const targetHeight = 10000; // Shapeの高さを直接指定
     
         return (
             this.x > targetX &&
