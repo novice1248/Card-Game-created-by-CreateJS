@@ -2,6 +2,10 @@ window.onload = function() {
     const canvas = document.getElementById("gameCanvas");
     const stage = new createjs.Stage(canvas);
 
+    let bg = new createjs.Shape();
+            bg.graphics.beginFill("pink").drawRect(0,0,960,540);
+            stage.addChild(bg);
+
     let player = new Player();
     let enemy = new Enemy("Slime", 30);
 
