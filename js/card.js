@@ -26,8 +26,11 @@ class Card extends createjs.Container {
     }
 
     play(target) {
-        this.effect(target);
+        console.log("Playing card effect on target.");
+        target.takeDamage(10);  // 10のダメージを敵に与える
+        console.log("Enemy's HP after damage: " + target.health); // デバッグ用ログ
     }
+    
 }
 
 // DraggableCardクラス
