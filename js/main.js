@@ -9,82 +9,100 @@ window.onload = function () {
   let player = new Player();
   let enemy = new Enemy("Slime", 30);
 
+  player.x = 100; // プレイヤーのX座標
+  player.y = 400; // プレイヤーのY座標
+
+  player.getBounds = function () {
+    return { x: player.x, y: player.y, width: 100, height: 100 };
+  };
+
   let enemyShape = new createjs.Shape();
-enemyShape.graphics.beginFill("red").drawRect(0, 0, 100, 100);
-enemyShape.x = 500;
-enemyShape.y = 200;
-enemyShape.setBounds(0, 0, 100, 100); // setBoundsを使用してBoundsを設定
-stage.addChild(enemyShape);
+  enemyShape.graphics.beginFill("red").drawRect(0, 0, 100, 100);
+  enemyShape.x = 500;
+  enemyShape.y = 200;
+  enemyShape.setBounds(0, 0, 100, 100); // setBoundsを使用してBoundsを設定
+  stage.addChild(enemyShape);
 
-let attackCard = new DraggableCard(
-    "Attack+", 
-    "assets/attack_plus.png", 
-    1, 
-    "attack", 
-    function() {
-        enemy.takeDamage(10);  // `enemyShape`ではなく、`enemy`にダメージを与える
+  let attackCard = new DraggableCard(
+    "Attack+",
+    "assets/attack_plus.png",
+    1,
+    "attack",
+    function () {
+      enemy.takeDamage(10); // `enemyShape`ではなく、`enemy`にダメージを与える
     },
     stage,
-    enemyShape  // 衝突判定にはenemyShapeを使う
-);
+    enemyShape // 衝突判定にはenemyShapeを使う
+  );
 
-let defenseCard = new DefenseCard(
-    "Shield+", 
-    "assets/defense_card.png", 
-    1, 
-    function(target) {
-        target.defense += 10; // プレイヤーの防御力を増加
-        console.log("Player's defense increased to " + target.defense);
+  let defenseCard = new DefenseCard(
+    "Shield+",
+    "assets/defense_card.png",
+    1,
+    function (target) {
+      target.defense += 10; // 防御力を増加
     },
     stage,
-    player
-);
+    player // ターゲットをプレイヤーに設定
+  );
 
-let healCard = new HealCard(
-    "Heal+", 
-    "assets/heal_card.png", 
-    1, 
-    function(target) {
-        target.health += 20; // HPを回復
+  let healCard = new HealCard(
+    "Heal+",
+    "assets/heal_card.png",
+    1,
+    function (target) {
+      target.health += 20; // HPを回復
+      if (target.health > 50) target.health = 50; // HPの上限を設定
     },
-    stage,  // ここでstageを渡す
-    player
-);
+    stage,
+    player // ターゲットをプレイヤーに設定
+  );
 
-
-//手札への追加
-player.hand.push(defenseCard);
-player.hand.push(healCard);
-
+  //手札への追加
+  player.hand.push(defenseCard);
+  player.hand.push(healCard);
 
   attackCard.x = 100;
   attackCard.y = 400;
   stage.addChild(attackCard);
 
   // カードを画面に表示
-defenseCard.x = 150; // 表示位置を設定
-defenseCard.y = 400;
-stage.addChild(defenseCard);
+  defenseCard.x = 150; // 表示位置を設定
+  defenseCard.y = 400;
+  stage.addChild(defenseCard);
 
-healCard.x = 250;
-healCard.y = 400;
-stage.addChild(healCard);
+  healCard.x = 250;
+  healCard.y = 400;
+  stage.addChild(healCard);
 
-// プレイヤーのターンでカードを使用できるように設定
-defenseCard.on("pressup", function() {
+  defenseCard.on("pressup", function () {
     if (defenseCard.isDroppedOnTarget(player)) {
-        defenseCard.play(player);
-        stage.removeChild(defenseCard);
+      defenseCard.play(player);
+      stage.removeChild(defenseCard);
     }
-});
+  });
 
-healCard.on("pressup", function() {
+  healCard.on("pressup", function () {
     if (healCard.isDroppedOnTarget(player)) {
-        healCard.play(player);
-        stage.removeChild(healCard);
+      healCard.play(player);
+      stage.removeChild(healCard);
     }
-});
+  });
 
+  // プレイヤーのターンでカードを使用できるように設定
+  defenseCard.on("pressup", function () {
+    if (defenseCard.isDroppedOnTarget(player)) {
+      defenseCard.play(player);
+      stage.removeChild(defenseCard);
+    }
+  });
+
+  healCard.on("pressup", function () {
+    if (healCard.isDroppedOnTarget(player)) {
+      healCard.play(player);
+      stage.removeChild(healCard);
+    }
+  });
 
   const playerHealthText = new createjs.Text(
     "Player HP: " + player.health,
