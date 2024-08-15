@@ -21,10 +21,12 @@ window.onload = function() {
         1, 
         "attack", 
         function(target) {
+            console.log("Applying damage to the enemy."); // デバッグログ
             target.takeDamage(10); // 敵のHPを減らす
+            console.log("Enemy's HP after damage: " + target.health); // デバッグログ
         },
         stage,
-        enemyShape
+        enemy
     );
 
     attackCard.x = 100;
@@ -71,11 +73,10 @@ window.onload = function() {
     function playerTurn() {
         attackCard.on("pressup", function() {
             if (attackCard.isDroppedOnTarget(enemyShape)) {
-                attackCard.play(enemy);
+                attackCard.play(enemy); // 敵にダメージを与える
                 stage.removeChild(attackCard);
                 nextTurn();
             } else {
-                // ドロップしなかった場合、カードを元の位置に戻す
                 attackCard.x = 100;
                 attackCard.y = 400;
             }
