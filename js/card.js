@@ -97,3 +97,27 @@ class DraggableCard extends Card {
     
 }
 
+class DefenseCard extends Card {
+    constructor(name, image, cost, effect, stage, target) {
+        super(name, image, cost, "defense", effect, stage, target);
+    }
+
+    play(target) {
+        console.log("Playing defense card effect on target.");
+        this.effect(target);  // 防御力を増加させる
+    }
+}
+
+class HealCard extends Card {
+    constructor(name, image, cost, effect, stage, target) {
+        super(name, image, cost, "heal", effect, stage, target);
+    }
+
+    play(target) {
+        console.log("Playing heal card effect on target.");
+        this.effect(target);  // HPを回復する
+    }
+}
+
+
+
