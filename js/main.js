@@ -45,13 +45,12 @@ let healCard = new HealCard(
     "assets/heal_card.png", 
     1, 
     function(target) {
-        target.health += 20; // プレイヤーのHPを回復
-        if (target.health > 50) target.health = 50; // HPの上限を設定
-        console.log("Player's health increased to " + target.health);
+        target.health += 20; // HPを回復
     },
-    stage,
+    stage,  // ここでstageを渡す
     player
 );
+
 
 //手札への追加
 player.hand.push(defenseCard);
