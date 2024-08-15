@@ -53,10 +53,39 @@ let healCard = new HealCard(
     player
 );
 
+//手札への追加
+player.hand.push(defenseCard);
+player.hand.push(healCard);
+
 
   attackCard.x = 100;
   attackCard.y = 400;
   stage.addChild(attackCard);
+
+  // カードを画面に表示
+defenseCard.x = 150; // 表示位置を設定
+defenseCard.y = 400;
+stage.addChild(defenseCard);
+
+healCard.x = 250;
+healCard.y = 400;
+stage.addChild(healCard);
+
+// プレイヤーのターンでカードを使用できるように設定
+defenseCard.on("pressup", function() {
+    if (defenseCard.isDroppedOnTarget(player)) {
+        defenseCard.play(player);
+        stage.removeChild(defenseCard);
+    }
+});
+
+healCard.on("pressup", function() {
+    if (healCard.isDroppedOnTarget(player)) {
+        healCard.play(player);
+        stage.removeChild(healCard);
+    }
+});
+
 
   const playerHealthText = new createjs.Text(
     "Player HP: " + player.health,
