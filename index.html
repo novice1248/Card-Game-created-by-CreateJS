@@ -1,16 +1,17 @@
-<html>
-  <head>
-    <meta charset="utf-8" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
-    <script src="global.js"></script>
-    <script src="init.js"></script>
-    <script src="battle.js"></script>
-    <script src="card.js"></script>
-    <script src="tick.js"></script>
-    <script src="mouse.js"></script>
-    <script src="gameover.js"></script>
-  </head>
-  <body>
-    <canvas id="myCanvas" width="960" height="540"></canvas>
-  </body>
+    <script src="js/card.js"></script> <!-- Cardクラスを定義 -->
+    <script src="js/player.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/combatManager.js"></script>
+    <script src="js/main.js"></script> <!-- main.jsが最後に読み込まれる -->
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+</body>
 </html>
