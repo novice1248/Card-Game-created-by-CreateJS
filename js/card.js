@@ -66,14 +66,19 @@ class DraggableCard extends Card {
     }
 
     isDroppedOnTarget(target) {
-        const targetBounds = target.getTransformedBounds(); // getTransformedBoundsを使用
+        const targetX = target.x;
+        const targetY = target.y;
+        const targetWidth = 100;  // Shapeの幅を直接指定
+        const targetHeight = 100; // Shapeの高さを直接指定
+    
         return (
-            this.x > targetBounds.x &&
-            this.x < targetBounds.x + targetBounds.width &&
-            this.y > targetBounds.y &&
-            this.y < targetBounds.y + targetBounds.height
+            this.x > targetX &&
+            this.x < targetX + targetWidth &&
+            this.y > targetY &&
+            this.y < targetY + targetHeight
         );
     }
+    
     
 
     play(target) {
