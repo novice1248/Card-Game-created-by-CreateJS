@@ -28,6 +28,32 @@ let attackCard = new DraggableCard(
     enemyShape  // 衝突判定にはenemyShapeを使う
 );
 
+let defenseCard = new DefenseCard(
+    "Shield+", 
+    "assets/defense_card.png", 
+    1, 
+    function(target) {
+        target.defense += 10; // プレイヤーの防御力を増加
+        console.log("Player's defense increased to " + target.defense);
+    },
+    stage,
+    player
+);
+
+let healCard = new HealCard(
+    "Heal+", 
+    "assets/heal_card.png", 
+    1, 
+    function(target) {
+        target.health += 20; // プレイヤーのHPを回復
+        if (target.health > 50) target.health = 50; // HPの上限を設定
+        console.log("Player's health increased to " + target.health);
+    },
+    stage,
+    player
+);
+
+
   attackCard.x = 100;
   attackCard.y = 400;
   stage.addChild(attackCard);
