@@ -40,7 +40,7 @@ class DraggableCard extends Card {
 
         this.on("mousedown", this.handleMouseDown.bind(this));
         this.on("pressmove", this.handleMouseMove.bind(this));
-        this.on("pressup", this.handleMouseUp.bind(this));
+        this.on("pressup", this.handleMouseUp.bind(this)); // "pressup"イベントがmouseupに対応
     }
 
     handleMouseDown(event) {
@@ -58,8 +58,9 @@ class DraggableCard extends Card {
             this.play(this.targetEnemy); // 敵に対してカードの効果を発動
             this._stage.removeChild(this); // カードをステージから削除
         } else {
+            // カードを元の位置に戻す
             this.x = 100;
-            this.y = 100;
+            this.y = 400;
         }
         this._stage.update();
     }
@@ -72,9 +73,5 @@ class DraggableCard extends Card {
             this.y > target.y &&
             this.y < target.y + targetBounds.height
         );
-    }
-
-    play(target) {
-        this.effect(target);
     }
 }
