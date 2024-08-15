@@ -12,12 +12,45 @@ function init() {
   stage.addChild(bg);
 
   // 自機を作成
-  player = new createjs.Bitmap('img/player.png');
+  player = new createjs.Bitmap("img/player.png");
   player.crossOrigin = "Anonymous";
-  player.x = 100;
-  player.y = STAGE_H / 2;
+  player.x = -50;
+  player.y = STAGE_H / 3;
   player.scaleX = 0.3;
   player.scaleY = 0.3;
+
+  // 敵の作成
+  enemy = new createjs.Bitmap("img/enemy.png");
+  enemy.crossOrigin = "Anonymous";
+  enemy.x = STAGE_W / 2;
+  enemy.y = STAGE_H / 10;
+  enemy.scaleX = 0.3;
+  enemy.scaleY = 0.3;
+
+  let btnW = 100; // ボタンの横幅
+  let btnH = 150; // ボタンの高さ
+
+  // ボタン要素をグループ化
+  let button = new createjs.Container();
+  button.x = 300;
+  button.y = 300;
+
+  // 座布団を作成
+  let buttonBg = new createjs.Shape();
+  buttonBg.graphics
+    .setStrokeStyle(1)
+    .beginStroke("#563d7c")
+    .beginFill("white")
+    .drawRoundRect(0, 0, btnW, btnH, 4);
+  button.addChild(buttonBg);
+
+  // ラベルを作成
+  let label = new createjs.Text("Button", "24px sans-serif", "#563d7c");
+  label.x = btnW / 2;
+  label.y = btnH / 2;
+  label.textAlign = "center";
+  label.textBaseline = "middle";
+  button.addChild(label);
 
   //initTitleの呼び出し
   initTitle();

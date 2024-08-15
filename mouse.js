@@ -9,6 +9,10 @@ function handleClick(event) {
         stage.removeChild(howToText);
         stage.removeChild(pressSpaceText);
         stage.addChild(player);
+        stage.addChild(enemy);
+        stage.addChild(button);
+        button.addChild(buttonBg);
+        button.addChild(label);
     }
   stage.update();
 }
